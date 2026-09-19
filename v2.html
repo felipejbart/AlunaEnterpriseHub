@@ -94,3 +94,1501 @@
       background: var(--orange);
       bottom: -120px;
       left: -110px;
+      animation-delay: -4s;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(20px,28px,0) scale(1.07); }
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 850;
+      margin-bottom: 22px;
+    }
+
+    h1, h2, h3, p { text-wrap: pretty; }
+
+    h1 {
+      font-size: clamp(46px, 7vw, 88px);
+      line-height: 0.97;
+      letter-spacing: -0.058em;
+      max-width: 980px;
+      margin: 0 0 30px;
+      font-weight: 900;
+    }
+
+    h1 span { color: var(--green); }
+
+    h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 0.98;
+      letter-spacing: -0.048em;
+      margin: 0 0 22px;
+      font-weight: 880;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin: 0 0 12px;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-copy,
+    .section-intro {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 760px;
+    }
+
+    .hero-copy { font-size: 20px; margin: 0 0 30px; }
+
+    .hero-actions,
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 17px 24px;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 850;
+      background: var(--orange);
+      color: #0B0B0D;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 32px rgba(255,107,44,0.18);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 38px rgba(255,107,44,0.25);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .microcopy {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 12px 0 0;
+      font-style: italic;
+    }
+
+    .hero-signal {
+      padding: 30px;
+      border: 1px solid rgba(255,107,44,0.36);
+      border-radius: 26px;
+      background:
+        linear-gradient(145deg, rgba(255,107,44,0.08), rgba(124,92,252,0.06)),
+        rgba(255,255,255,0.025);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-signal::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.08), transparent 60%);
+      transform: translateX(-120%);
+      animation: sheen 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sheen {
+      0%, 70% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    .signal-label,
+    .section-number {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .section-number {
+      color: var(--orange);
+      margin-bottom: 15px;
+    }
+
+    .signal-result {
+      font-size: clamp(31px, 4vw, 48px);
+      line-height: 1.02;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      margin: 10px 0 14px;
+    }
+
+    .signal-explainer {
+      color: var(--muted);
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .signal-map {
+      display: grid;
+      gap: 15px;
+      margin-top: 42px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr) 100px;
+      align-items: center;
+      gap: 18px;
+      padding: 19px 20px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+    }
+
+    .signal-row.focus {
+      border-color: rgba(255,107,44,0.55);
+    }
+
+    .signal-name {
+      font-weight: 780;
+      font-size: 15px;
+    }
+
+    .signal-track {
+      position: relative;
+      height: 10px;
+      background: var(--surface-3);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .signal-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--violet), var(--orange), var(--green));
+      transition: width 1.2s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .signal-band {
+      text-align: right;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .signal-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 820px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .content-card,
+    .evidence-card,
+    .authority-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px;
+    }
+
+    .content-card.large { grid-column: span 2; }
+
+    .content-card p,
+    .evidence-card p,
+    .authority-card p,
+    .connection p {
+      color: var(--muted);
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .question {
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      font-weight: 850;
+      margin-top: 16px;
+    }
+
+    .investigation {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .investigation-item {
+      padding: 18px 19px;
+      background: var(--surface-2);
+      border: 1px solid rgba(245,244,239,0.06);
+      border-radius: 14px;
+      font-weight: 680;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .investigation-item:hover {
+      transform: translateX(5px);
+      border-color: rgba(184,255,61,0.28);
+    }
+
+    .connection {
+      border-radius: 30px;
+      padding: 48px;
+      background:
+        linear-gradient(135deg, rgba(124,92,252,0.18), rgba(255,61,129,0.08));
+      border: 1px solid rgba(124,92,252,0.35);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 38px;
+    }
+
+    .evidence-stat {
+      font-size: clamp(42px, 6vw, 74px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.055em;
+      color: var(--green);
+      margin-bottom: 18px;
+    }
+
+    .source-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--text);
+      font-size: 13px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .source-note {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    .lily-wrap {
+      background:
+        radial-gradient(circle at 8% 30%, rgba(184,255,61,0.07), transparent 24rem),
+        radial-gradient(circle at 88% 70%, rgba(255,61,129,0.06), transparent 28rem);
+    }
+
+    .lily-lockup {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .lily-name {
+      font-size: clamp(52px, 8vw, 102px);
+      line-height: 0.88;
+      letter-spacing: -0.065em;
+      font-weight: 930;
+      margin: 0;
+    }
+
+    .lily-name span { color: var(--green); }
+
+    .lily-statement {
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      font-weight: 820;
+      margin: 0 0 18px;
+    }
+
+    .method {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 54px;
+    }
+
+    .method-step {
+      position: relative;
+      padding: 25px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-height: 150px;
+      overflow: hidden;
+      opacity: 0.45;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.55s ease;
+    }
+
+    .method-step.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .method-index {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 28px;
+    }
+
+    .method-title {
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 9px;
+    }
+
+    .method-copy {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .method-step:nth-child(1) { border-color: rgba(255,107,44,0.42); }
+    .method-step:nth-child(2) { border-color: rgba(184,255,61,0.34); }
+    .method-step:nth-child(3) { border-color: rgba(255,61,129,0.34); }
+    .method-step:nth-child(4) { border-color: rgba(124,92,252,0.42); }
+    .method-step:nth-child(5) { border-color: rgba(255,107,44,0.42); }
+    .method-step:nth-child(6) { border-color: rgba(184,255,61,0.34); }
+
+    .authority-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      margin-top: 38px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .proof {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .proof strong {
+      display: block;
+      font-size: 30px;
+      letter-spacing: -0.04em;
+      margin-bottom: 5px;
+      color: var(--green);
+    }
+
+    .proof span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .review-list {
+      list-style: none;
+      padding: 0;
+      margin: 26px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .review-list li {
+      padding-left: 25px;
+      position: relative;
+      color: var(--muted);
+    }
+
+    .review-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 850;
+    }
+
+    .mid-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      margin-top: 38px;
+      padding: 26px;
+      background: rgba(255,107,44,0.07);
+      border: 1px solid rgba(255,107,44,0.24);
+      border-radius: 20px;
+    }
+
+    .mid-cta p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 120px 25px 140px;
+    }
+
+    .cta h2 {
+      max-width: 840px;
+      margin: 0 auto 22px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 32px;
+      font-size: 18px;
+    }
+
+    .secondary-actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .secondary-actions a,
+    .secondary-actions button {
+      background: none;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .sticky-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .sticky-cta .button {
+      box-shadow: 0 14px 40px rgba(0,0,0,0.42);
+      padding: 14px 19px;
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .error {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .error-box {
+      max-width: 650px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .lily-lockup,
+      .authority-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { min-height: auto; }
+
+      .method {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .signal-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .signal-band { text-align: left; }
+
+      .content-grid,
+      .evidence-grid,
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card.large { grid-column: span 1; }
+
+      .mid-cta {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .page { padding: 0 18px; }
+
+      .hero { padding: 74px 0; }
+
+      section { padding: 74px 0; }
+
+      .method { grid-template-columns: 1fr; }
+
+      .connection { padding: 30px; }
+
+      .sticky-cta {
+        left: 16px;
+        right: 16px;
+        bottom: 14px;
+      }
+
+      .sticky-cta .button { width: 100%; }
+
+      .hero-actions .button,
+      .cta-row .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal,
+      .method-step {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div id="app"></div>
+
+<script>
+  /*
+    ============================================================
+    ALUNA ENTERPRISE HUB
+    OPERATIONAL CAPACITY DIAGNOSTIC V2.0
+
+    V2 CHANGE GROUPS
+    1. Hero conversion CTA + sticky CTA
+    2. Visual Signal Map replaces raw score fractions
+    3. Front-end normalisation + tie/no-signal handling
+    4. Evidence/context cards with external sources
+    5. L.I.L.Y. Operating System introduction
+    6. Six-stage method with richer explanation
+    7. Experience/authority section
+    8. Scroll motion and animated signal bars
+
+    PRESERVED FROM V1
+    - Tally URL parameter contract
+    - Five score inputs
+    - Tally Primary/Secondary inputs
+    - Existing content library
+    - Calendly and LinkedIn
+    - Save/share behaviour
+    - Email excluded from URL
+    ============================================================
+  */
+
+  const CONTENT = {
+    manual: {
+      name: "Manual Load",
+      max: 6,
+      hero: "Your business may be losing capacity to manual work.",
+      whyHeadline: "Some of the work may exist because the process was built that way.",
+      why: "Your responses suggest that repetitive administration, information movement or rework may be consuming capacity that could otherwise be used for higher-value work. The issue is not necessarily that the work is difficult. It is that some of it may not need to be done in its current form.",
+      meaning: "Manual work becomes an operational constraint when people repeatedly move, check, reconcile or recreate information.",
+      question: "How much of the work your team performs is necessary, and how much exists because the process works this way?",
+      investigation: [
+        "Repetitive data entry and re-entry",
+        "Spreadsheet and system handoffs",
+        "Duplicate reporting or administration",
+        "Rework caused by incomplete or changing information"
+      ]
+    },
+
+    coordination: {
+      name: "Coordination Drag",
+      max: 9,
+      hero: "Your biggest operational friction may be coordination.",
+      whyHeadline: "Work may be slowing down between people, teams or stages.",
+      why: "Your responses suggest that chasing, handoffs, approvals or unclear ownership may be creating friction. A process can be individually efficient while still being slow overall if work repeatedly waits for someone else.",
+      meaning: "Coordination becomes expensive when people have to actively push work forward rather than the process moving it forward.",
+      question: "Where does work stop moving unless someone actively pushes it forward?",
+      investigation: [
+        "Approval chains and waiting points",
+        "Unclear ownership and accountability",
+        "Actions that depend on follow-up",
+        "Meetings and handoffs required to maintain alignment"
+      ]
+    },
+
+    scaling: {
+      name: "Scaling Friction",
+      max: 9,
+      hero: "Growth may be creating work faster than it creates capacity.",
+      whyHeadline: "More volume may be creating disproportionately more operational effort.",
+      why: "Your responses suggest that important processes may depend on people, manual coordination or activities that grow directly with workload. This can remain manageable at one level of activity and become a constraint as the business grows.",
+      meaning: "The key question is whether additional volume requires additional operational effort at roughly the same rate.",
+      question: "What would happen if your business grew 25% without adding 25% more operational effort?",
+      investigation: [
+        "Processes where workload rises directly with volume",
+        "Key-person dependencies",
+        "Manual administration created by growth",
+        "Coordination requirements that increase with workload"
+      ]
+    },
+
+    visibility: {
+      name: "Visibility Gap",
+      max: 9,
+      hero: "Your business may be spending too much time finding out what happened.",
+      whyHeadline: "Information may not be sufficiently connected, visible or trusted when decisions need to be made.",
+      why: "Your responses suggest that people may need to reconcile information, investigate what happened or establish which version is correct before action can be taken.",
+      meaning: "Visibility problems consume capacity when managers and teams have to establish the facts before they can decide what to do.",
+      question: "How much management time is spent establishing the facts before a decision can even begin?",
+      investigation: [
+        "Multiple versions of the same information",
+        "Manual reporting and reconciliation",
+        "Time spent investigating causes",
+        "Information required to make decisions but difficult to access"
+      ]
+    },
+
+    automation: {
+      name: "Automation Readiness Gap",
+      max: 12,
+      hero: "You may have automation opportunities, but the process needs attention first.",
+      whyHeadline: "The opportunity may be real, but the foundations for automation may not yet be clear.",
+      why: "Your responses suggest that some processes may contain inconsistent inputs, unclear ownership, exceptions or dependencies on individual knowledge. Automation can make a good process faster. It can also make a fragmented process fail faster.",
+      meaning: "The first opportunity may not be automation itself. It may be making the underlying process clear, repeatable and measurable.",
+      question: "Before asking what we can automate, can we clearly explain how the process is supposed to work?",
+      investigation: [
+        "Processes nobody can clearly describe end-to-end",
+        "Poor or inconsistent data",
+        "Unclear ownership and decision points",
+        "Manual exceptions and individual workarounds"
+      ]
+    }
+  };
+
+  const SECONDARY_INSIGHTS = {
+    "manual|coordination": "Manual work and coordination can reinforce each other. Information that is difficult to move or maintain can create additional chasing, checking and handoffs.",
+    "manual|scaling": "Manual work can become increasingly expensive in terms of capacity as volume grows. Work that is manageable today may become a constraint if the business continues to scale.",
+    "manual|visibility": "Manual information handling can make visibility harder. When information is repeatedly moved or reconciled, establishing a trusted view can consume additional management time.",
+    "manual|automation": "There may be automation opportunities here, but the first question is whether the underlying process is sufficiently clear and repeatable to automate effectively.",
+    "coordination|manual": "Coordination friction may be amplified by the amount of manual information movement required between people and teams.",
+    "coordination|scaling": "If coordination requirements increase with workload, growth can create additional management effort even when the underlying work itself has not become more complex.",
+    "coordination|visibility": "Poor visibility can increase coordination because people compensate by asking for updates, reconciling information and checking progress manually.",
+    "coordination|automation": "Before automating handoffs, it may be necessary to clarify ownership, decision points and the process itself.",
+    "scaling|manual": "Growth-driven workload combined with manual processes can create an important capacity question: does additional volume require additional people simply to keep the process moving?",
+    "scaling|coordination": "Growth may be increasing not only the amount of work, but also the number of interactions required to coordinate it.",
+    "scaling|visibility": "As volume increases, information gaps can make it harder to understand where capacity is being consumed and which problems are actually driving the workload.",
+    "scaling|automation": "There may be a strong case to examine automation, but scaling a process before its foundations are clear can simply multiply the underlying problems.",
+    "visibility|manual": "The effort required to produce and reconcile information may itself be contributing to the visibility problem.",
+    "visibility|coordination": "When teams lack a shared view of information, coordination effort often increases as people compensate through meetings, messages and follow-ups.",
+    "visibility|scaling": "As the business grows, information gaps can become more costly because there are more transactions, decisions and dependencies to understand.",
+    "visibility|automation": "Better technology may help, but the first step is establishing which information matters, who owns it and how it should flow through the process.",
+    "automation|manual": "The amount of manual work suggests there may be automation opportunities, but those opportunities should be assessed alongside the quality and consistency of the underlying process.",
+    "automation|coordination": "Automation may eventually reduce some handoffs, but unclear ownership or decision points need to be addressed first.",
+    "automation|scaling": "If the business is already experiencing scaling friction, automation could potentially help decouple workload growth from operational effort once the right processes have been identified.",
+    "automation|visibility": "Automation will only improve visibility if the underlying information is consistent, trusted and connected to the decisions the business needs to make."
+  };
+
+  const EVIDENCE = [
+    {
+      statistic: "20.2%",
+      headline: "of Irish enterprises used AI in 2025.",
+      copy: "Adoption is growing quickly, but only 6.2% of enterprises reported using AI to automate workflows or assist decision-making. Technology adoption and operational integration are not the same thing.",
+      source: "Central Statistics Office, Information Society Statistics - Enterprises 2025",
+      url: "https://www.cso.ie/en/releasesandpublications/ep/p-isse/informationsocietystatistics-enterprises2025/artificialintelligence/"
+    },
+    {
+      statistic: "1 in 2",
+      headline: "surveyed SMEs reached competent digital maturity or better.",
+      copy: "The OECD's 2025 D4SME survey found wide variation in digital maturity, with maintenance cost and lack of time for training among the most frequently reported barriers. The survey covered SMEs across ten OECD countries and is not representative of every SME population.",
+      source: "OECD, SME Digitalisation for Competitiveness: 2025 D4SME Survey",
+      url: "https://www.oecd.org/en/publications/sme-digitalisation-for-competitiveness_197e3077-en.html"
+    }
+  ];
+
+  const PARAMS = new URLSearchParams(window.location.search);
+
+  const data = {
+    name: clean(PARAMS.get("name")) || "there",
+    company: clean(PARAMS.get("company")) || "your business",
+    jobtitle: clean(PARAMS.get("jobtitle")) || "",
+    manual: number(PARAMS.get("manual")),
+    coordination: number(PARAMS.get("coordination")),
+    scaling: number(PARAMS.get("scaling")),
+    visibility: number(PARAMS.get("visibility")),
+    automation: number(PARAMS.get("automation")),
+    primary: clean(PARAMS.get("primary")),
+    secondary: clean(PARAMS.get("secondary")),
+    calendly: clean(PARAMS.get("calendly")) || "https://calendly.com/felipebart"
+  };
+
+  function clean(value) {
+    return value ? value.trim() : "";
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function escapeHTML(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function escapeAttribute(value) {
+    return escapeHTML(value);
+  }
+
+  const VALID_KEYS = ["manual", "coordination", "scaling", "visibility", "automation"];
+
+  function normaliseKey(value) {
+    if (!value) return "";
+    const v = value.toLowerCase().trim();
+    if (VALID_KEYS.includes(v)) return v;
+
+    const aliases = {
+      "manual load": "manual",
+      "coordination drag": "coordination",
+      "scaling friction": "scaling",
+      "visibility gap": "visibility",
+      "automation readiness gap": "automation"
+    };
+
+    return aliases[v] || "";
+  }
+
+  data.primary = normaliseKey(data.primary);
+  data.secondary = normaliseKey(data.secondary);
+
+  const hasRequiredData =
+    data.primary &&
+    data.secondary &&
+    VALID_KEYS.includes(data.primary) &&
+    VALID_KEYS.includes(data.secondary);
+
+  function strength(key) {
+    const max = CONTENT[key].max;
+    return Math.max(0, Math.min(1, data[key] / max));
+  }
+
+  function bandFromStrength(value) {
+    if (value === 0) return "Low";
+    if (value <= 0.33) return "Developing";
+    if (value <= 0.66) return "Elevated";
+    return "Strong";
+  }
+
+  function analyseSignals() {
+    const strengths = {};
+    VALID_KEYS.forEach(key => strengths[key] = strength(key));
+
+    const maxStrength = Math.max(...Object.values(strengths));
+    const topKeys = VALID_KEYS.filter(key => Math.abs(strengths[key] - maxStrength) < 0.0001);
+
+    if (maxStrength === 0) {
+      return {
+        type: "none",
+        strengths,
+        topKeys,
+        headline: "No dominant operational constraint surfaced.",
+        explainer: "Your responses did not identify a strong signal across the five dimensions. That does not prove there is no opportunity. It means this short diagnostic has not isolated one from the answers provided."
+      };
+    }
+
+    if (topKeys.length > 1) {
+      return {
+        type: "tie",
+        strengths,
+        topKeys,
+        headline: "Multiple operational signals surfaced at similar strength.",
+        explainer: "The diagnostic does not support claiming that one of these areas is definitively more important than the others. The useful next step is to investigate how they interact and which one consumes the most real capacity."
+      };
+    }
+
+    const key = topKeys[0];
+
+    return {
+      type: "single",
+      strengths,
+      topKeys,
+      headline: CONTENT[key].name,
+      explainer: CONTENT[key].hero
+    };
+  }
+
+  function chooseNarrativePrimary(analysis) {
+    if (analysis.type === "single") return analysis.topKeys[0];
+    if (analysis.type === "tie" && analysis.topKeys.includes(data.primary)) return data.primary;
+    if (analysis.type === "tie") return analysis.topKeys[0];
+    return data.primary;
+  }
+
+  function chooseNarrativeSecondary(primaryKey) {
+    if (data.secondary && data.secondary !== primaryKey) return data.secondary;
+
+    const candidates = VALID_KEYS
+      .filter(key => key !== primaryKey)
+      .sort((a, b) => strength(b) - strength(a));
+
+    return candidates[0] || "";
+  }
+
+  function heroSignalHTML(analysis, narrativePrimary) {
+    if (analysis.type === "none") {
+      return `
+        <div class="signal-label">Your diagnostic pattern</div>
+        <div class="signal-result">No dominant constraint</div>
+        <p class="signal-explainer">${escapeHTML(analysis.explainer)}</p>
+      `;
+    }
+
+    if (analysis.type === "tie") {
+      const names = analysis.topKeys.map(key => CONTENT[key].name).join(" · ");
+      return `
+        <div class="signal-label">Your diagnostic pattern</div>
+        <div class="signal-result">Multiple strong signals</div>
+        <p class="signal-explainer">
+          ${escapeHTML(names)} surfaced at the same relative strength.
+          ${escapeHTML(analysis.explainer)}
+        </p>
+      `;
+    }
+
+    return `
+      <div class="signal-label">Your strongest relative signal</div>
+      <div class="signal-result">${escapeHTML(CONTENT[narrativePrimary].name)}</div>
+      <p class="signal-explainer">${escapeHTML(CONTENT[narrativePrimary].hero)}</p>
+    `;
+  }
+
+  function signalRow(key, narrativePrimary, analysis) {
+    const pct = Math.round(analysis.strengths[key] * 100);
+    const level = bandFromStrength(analysis.strengths[key]);
+    const focus = analysis.topKeys.includes(key);
+
+    return `
+      <div class="signal-row ${focus ? "focus" : ""}">
+        <div class="signal-name">${escapeHTML(CONTENT[key].name)}</div>
+        <div class="signal-track" aria-label="${escapeHTML(CONTENT[key].name)} ${escapeHTML(level)} signal">
+          <div class="signal-fill" data-width="${pct}%"></div>
+        </div>
+        <div class="signal-band">${escapeHTML(level)}</div>
+      </div>
+    `;
+  }
+
+  function evidenceCard(item) {
+    return `
+      <article class="evidence-card reveal">
+        <div class="evidence-stat">${escapeHTML(item.statistic)}</div>
+        <h3>${escapeHTML(item.headline)}</h3>
+        <p>${escapeHTML(item.copy)}</p>
+        <a class="source-link" href="${escapeAttribute(item.url)}" target="_blank" rel="noopener noreferrer">
+          Source: ${escapeHTML(item.source)}
+        </a>
+      </article>
+    `;
+  }
+
+  if (!hasRequiredData) {
+    document.getElementById("app").innerHTML = `
+      <div class="error">
+        <div class="error-box">
+          <div class="eyebrow">Operational Capacity Diagnostic</div>
+          <h2>Report link incomplete.</h2>
+          <p class="section-intro">
+            This report needs the diagnostic results supplied by the completed Tally submission.
+            Please return to the diagnostic and submit it again.
+          </p>
+        </div>
+      </div>
+    `;
+  } else {
+    const analysis = analyseSignals();
+    const narrativePrimaryKey = chooseNarrativePrimary(analysis);
+    const narrativeSecondaryKey = chooseNarrativeSecondary(narrativePrimaryKey);
+    const primary = CONTENT[narrativePrimaryKey];
+    const secondary = CONTENT[narrativeSecondaryKey];
+
+    const tieContext = analysis.type === "tie"
+      ? `<p class="signal-note">
+          Several dimensions are equally strong on a normalised basis. The narrative below starts with
+          <strong>${escapeHTML(primary.name)}</strong> as one investigation lens, not as a claim that it is definitively the largest problem.
+         </p>`
+      : "";
+
+    const noSignalContext = analysis.type === "none"
+      ? `<p class="signal-note">
+          Because no dominant constraint surfaced, the narrative below should be treated as a prompt for investigation rather than a diagnosis.
+         </p>`
+      : "";
+
+    document.getElementById("app").innerHTML = `
+      <main>
+
+        <!-- V2.1 HERO + IMMEDIATE CTA -->
+        <section class="hero" id="top">
+          <div class="orb one"></div>
+          <div class="orb two"></div>
+
+          <div class="page">
+            <div class="hero-grid">
+              <div class="reveal">
+                <div class="eyebrow">Operational Capacity Diagnostic</div>
+
+                <h1>
+                  Hi ${escapeHTML(data.name)}.
+                  <br>
+                  Here is your
+                  <span>${escapeHTML(data.company)}</span>
+                  diagnostic.
+                </h1>
+
+                <p class="hero-copy">
+                  Your answers give us an initial view of where operational capacity may be getting consumed,
+                  where the signals may connect, and what is worth investigating next.
+                </p>
+
+                <div class="hero-actions">
+                  <a class="button" href="${escapeAttribute(data.calendly)}" target="_blank" rel="noopener noreferrer">
+                    Book My Free 30-Minute Review
+                  </a>
+
+                  <a class="button secondary" href="#signal-map">
+                    Explore My Results ↓
+                  </a>
+                </div>
+
+                <p class="microcopy">
+                  No sales presentation. No obligation. Just an initial review of the opportunity.
+                </p>
+              </div>
+
+              <aside class="hero-signal reveal">
+                ${heroSignalHTML(analysis, narrativePrimaryKey)}
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <!-- V2.2 VISUAL SIGNAL MAP -->
+        <section id="signal-map">
+          <div class="page">
+            <div class="reveal">
+              <div class="section-number">01 / YOUR SIGNAL MAP</div>
+
+              <h2>
+                Five signals.<br>
+                No false precision.
+              </h2>
+
+              <p class="section-intro">
+                The bars show the relative strength of each signal based on your responses.
+                They are not performance scores, financial valuations or industry rankings.
+              </p>
+            </div>
+
+            <div class="signal-map reveal">
+              ${signalRow("manual", narrativePrimaryKey, analysis)}
+              ${signalRow("coordination", narrativePrimaryKey, analysis)}
+              ${signalRow("scaling", narrativePrimaryKey, analysis)}
+              ${signalRow("visibility", narrativePrimaryKey, analysis)}
+              ${signalRow("automation", narrativePrimaryKey, analysis)}
+            </div>
+
+            ${tieContext}
+            ${noSignalContext}
+          </div>
+        </section>
+
+        <!-- V2.3 INTERPRETATION -->
+        <section>
+          <div class="page">
+            <div class="section-number reveal">02 / WHAT YOUR ANSWERS SUGGEST</div>
+
+            <div class="content-grid">
+              <div class="content-card large reveal">
+                <div class="eyebrow">${escapeHTML(primary.name)}</div>
+                <h2>${escapeHTML(primary.whyHeadline)}</h2>
+                <p>${escapeHTML(primary.why)}</p>
+              </div>
+
+              <div class="content-card reveal">
+                <h3>What this could mean</h3>
+                <p>${escapeHTML(primary.meaning)}</p>
+              </div>
+
+              <div class="content-card reveal">
+                <h3>The question to investigate</h3>
+                <div class="question">${escapeHTML(primary.question)}</div>
+              </div>
+            </div>
+
+            <div class="mid-cta reveal">
+              <p>
+                A diagnostic can identify a pattern. A conversation lets us test whether that pattern
+                represents a real operational opportunity in ${escapeHTML(data.company)}.
+              </p>
+              <a class="button" href="${escapeAttribute(data.calendly)}" target="_blank" rel="noopener noreferrer">
+                Review This With Me
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- V2.4 EVIDENCE -->
+        <section>
+          <div class="page">
+            <div class="reveal">
+              <div class="section-number">03 / CONTEXT</div>
+              <h2>
+                You are not alone.<br>
+                The advantage is in what you do next.
+              </h2>
+              <p class="section-intro">
+                Your diagnostic is not an industry benchmark. These independent data points provide broader context
+                on the gap between adopting technology and integrating it effectively into how work gets done.
+              </p>
+            </div>
+
+            <div class="evidence-grid">
+              ${EVIDENCE.map(evidenceCard).join("")}
+            </div>
+
+            <p class="source-note reveal">
+              These sources describe broader enterprise and SME populations. They are context, not a statistical comparison of your individual diagnostic result.
+            </p>
+          </div>
+        </section>
+
+        <!-- V2.5 INVESTIGATION -->
+        <section>
+          <div class="page">
+            <div class="section-number reveal">04 / INVESTIGATE FIRST</div>
+
+            <div class="reveal">
+              <h2>
+                Where I would<br>
+                look first.
+              </h2>
+
+              <p class="section-intro">
+                The diagnostic identifies a signal. The next step is to understand what is actually creating the workload,
+                friction or dependency behind it.
+              </p>
+            </div>
+
+            <div class="investigation reveal">
+              ${primary.investigation.map(item => `
+                <div class="investigation-item">${escapeHTML(item)}</div>
+              `).join("")}
+            </div>
+          </div>
+        </section>
+
+        <!-- V2.6 SIGNAL CONNECTION -->
+        <section>
+          <div class="page">
+            <div class="section-number reveal">05 / THE CONNECTION</div>
+
+            <div class="connection reveal">
+              <div class="eyebrow">Another important lens: ${escapeHTML(secondary.name)}</div>
+              <h2>The signals may be connected.</h2>
+              <p>
+                ${escapeHTML(
+                  SECONDARY_INSIGHTS[`${narrativePrimaryKey}|${narrativeSecondaryKey}`] ||
+                  "Operational constraints often reinforce one another. The next step is to understand which relationship is creating the most real workload, delay or decision friction."
+                )}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- V2.7 L.I.L.Y. OS -->
+        <section class="lily-wrap">
+          <div class="page">
+            <div class="section-number reveal">06 / THE OPERATING SYSTEM</div>
+
+            <div class="lily-lockup">
+              <div class="reveal">
+                <p class="lily-name">
+                  The <span>L.I.L.Y.</span><br>
+                  Operating System
+                </p>
+              </div>
+
+              <div class="reveal">
+                <div class="eyebrow">Lean Integration Lets You</div>
+                <p class="lily-statement">
+                  create capacity before adding complexity.
+                </p>
+                <p class="section-intro">
+                  The principle is simple: do not add technology to unnecessary work.
+                  First understand the work, remove what does not need to exist, connect what matters,
+                  and then apply automation and AI where they create genuine leverage.
+                </p>
+              </div>
+            </div>
+
+            <div class="method" id="method">
+              <div class="method-step">
+                <div class="method-index">01</div>
+                <div class="method-title">DIAGNOSE</div>
+                <div class="method-copy">Find where capacity, time and decision quality are being lost.</div>
+              </div>
+
+              <div class="method-step">
+                <div class="method-index">02</div>
+                <div class="method-title">QUANTIFY</div>
+                <div class="method-copy">Establish the workload, business impact and evidence behind the problem.</div>
+              </div>
+
+              <div class="method-step">
+                <div class="method-index">03</div>
+                <div class="method-title">REDESIGN</div>
+                <div class="method-copy">Remove unnecessary work and simplify how the process should operate.</div>
+              </div>
+
+              <div class="method-step">
+                <div class="method-index">04</div>
+                <div class="method-title">IMPLEMENT</div>
+                <div class="method-copy">Make the better process real with the lowest-friction tools available.</div>
+              </div>
+
+              <div class="method-step">
+                <div class="method-index">05</div>
+                <div class="method-title">AUTOMATE</div>
+                <div class="method-copy">Remove repeatable human effort once the process is stable enough.</div>
+              </div>
+
+              <div class="method-step">
+                <div class="method-index">06</div>
+                <div class="method-title">AI</div>
+                <div class="method-copy">Add intelligence where it improves decisions, execution or scale.</div>
+              </div>
+            </div>
+
+            <p class="signal-note reveal">
+              AI is a lever, not the destination. The destination is a business that can operate with more clarity, capacity and control.
+            </p>
+          </div>
+        </section>
+
+        <!-- V2.8 AUTHORITY -->
+        <section>
+          <div class="page">
+            <div class="section-number reveal">07 / WHY THIS APPROACH</div>
+
+            <div class="authority-grid">
+              <article class="authority-card reveal">
+                <div class="eyebrow">Built from operating experience, not theory</div>
+                <h2>Complexity accumulates faster than operating models evolve.</h2>
+
+                <p>
+                  I have spent 17 years working across planning, operations and transformation in Brazil,
+                  Europe and Africa, from greenfield manufacturing and global inventory consolidation
+                  to SAP S/4HANA and IBP implementations and global demand planning.
+                </p>
+
+                <br>
+
+                <p>
+                  Working across complex organisations and with stakeholders from more than 60 nationalities
+                  reinforced a recurring pattern: operational problems rarely begin with a lack of technology.
+                  They usually begin with work, information and decisions that have become harder to connect,
+                  maintain and scale.
+                </p>
+
+                <br>
+
+                <p>
+                  That is the thinking behind L.I.L.Y.: simplify the work, integrate what matters,
+                  create visibility and control, then use automation and AI where they genuinely create leverage.
+                </p>
+              </article>
+
+              <div class="proof-grid reveal">
+                <div class="proof">
+                  <strong>17 years</strong>
+                  <span>Planning, operations and transformation</span>
+                </div>
+
+                <div class="proof">
+                  <strong>3 regions</strong>
+                  <span>Brazil · Europe · Africa</span>
+                </div>
+
+                <div class="proof">
+                  <strong>60+</strong>
+                  <span>Nationalities across cross-functional collaboration</span>
+                </div>
+
+                <div class="proof">
+                  <strong>SAP · IBP · Analytics · Automation · AI</strong>
+                  <span>Technology applied to real operating problems</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- V2.9 COMMERCIAL BRIDGE -->
+        <section>
+          <div class="page">
+            <div class="section-number reveal">08 / FROM SIGNAL TO EVIDENCE</div>
+
+            <div class="content-grid">
+              <div class="content-card large reveal">
+                <div class="eyebrow">The diagnostic tells us where to look</div>
+                <h2>The next question is whether the opportunity is real.</h2>
+                <p>
+                  This report does not tell us how much the problem costs, how many hours are involved,
+                  or exactly what should change. Those claims require evidence from the operational reality.
+                </p>
+              </div>
+
+              <div class="content-card reveal">
+                <h3>In a free 30-minute review, we would explore:</h3>
+                <ul class="review-list">
+                  <li>Where operational capacity may currently be consumed</li>
+                  <li>Which processes may be creating unnecessary work</li>
+                  <li>What could potentially be removed, simplified or automated</li>
+                  <li>What information is needed to quantify the opportunity properly</li>
+                </ul>
+              </div>
+
+              <div class="content-card reveal">
+                <h3>No complicated pitch.</h3>
+                <p>
+                  The first conversation is simply about understanding whether there is a real operational opportunity
+                  worth investigating and what evidence would be needed to prove it.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- V2.10 FINAL CTA -->
+        <section class="cta">
+          <div class="page reveal">
+            <div class="eyebrow">Lean Integration Lets You move from signal to evidence</div>
+
+            <h2>
+              Want to understand what these signals could mean for ${escapeHTML(data.company)}?
+            </h2>
+
+            <p>
+              Book a free 30-minute Operational Review. We will look at the pattern,
+              the underlying process and what would be required to quantify the opportunity.
+            </p>
+
+            <div class="cta-row" style="justify-content:center;">
+              <a class="button" href="${escapeAttribute(data.calendly)}" target="_blank" rel="noopener noreferrer">
+                Book My Free 30-Minute Review
+              </a>
+            </div>
+
+            <p class="microcopy">
+              No sales presentation. No obligation. Just an initial review of the opportunity.
+            </p>
+
+            <div class="secondary-actions">
+              <button id="saveResults">Save / Share My Results</button>
+
+              <a href="https://www.linkedin.com/in/felipebart/" target="_blank" rel="noopener noreferrer">
+                Talk to Felipe
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="sticky-cta" id="stickyCta">
+        <a class="button" href="${escapeAttribute(data.calendly)}" target="_blank" rel="noopener noreferrer">
+          Free Operational Review →
+        </a>
+      </div>
+    `;
+
+    /*
+      V2 INTERACTIONS
+    */
+
+    const revealItems = document.querySelectorAll(".reveal");
+    const signalFills = document.querySelectorAll(".signal-fill");
+    const stickyCta = document.getElementById("stickyCta");
+    const hero = document.querySelector(".hero");
+    const method = document.getElementById("method");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    const signalObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          signalFills.forEach((fill, index) => {
+            setTimeout(() => {
+              fill.style.width = fill.dataset.width;
+            }, index * 110);
+          });
+          signalObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+
+    const signalMap = document.querySelector(".signal-map");
+    if (signalMap) signalObserver.observe(signalMap);
+
+    const methodObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const steps = entry.target.querySelectorAll(".method-step");
+          steps.forEach((step, index) => {
+            setTimeout(() => step.classList.add("active"), index * 130);
+          });
+          methodObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    if (method) methodObserver.observe(method);
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (stickyCta) {
+          stickyCta.classList.toggle("visible", !entry.isIntersecting);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    if (hero) heroObserver.observe(hero);
+
+    /*
+      SAVE / SHARE
+      Email is intentionally not used.
+    */
+
+    const saveButton = document.getElementById("saveResults");
+
+    if (saveButton) {
+      saveButton.addEventListener("click", async () => {
+        const reportUrl = window.location.href;
+
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: `${data.company} Operational Capacity Diagnostic`,
+              text: "My Operational Capacity Diagnostic",
+              url: reportUrl
+            });
+          } catch (error) {
+            // User cancelled sharing.
+          }
+        } else if (navigator.clipboard) {
+          try {
+            await navigator.clipboard.writeText(reportUrl);
+            saveButton.textContent = "Report Link Copied";
+
+            setTimeout(() => {
+              saveButton.textContent = "Save / Share My Results";
+            }, 2500);
+          } catch (error) {
+            saveButton.textContent = "Copy Failed";
+          }
+        } else {
+          window.prompt("Copy your report link:", reportUrl);
+        }
+      });
+    }
+  }
+</script>
+</body>
+</html>
