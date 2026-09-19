@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operational Capacity Diagnostic</title>
+
+  <style>
+    :root {
+      --bg: #0B0B0D;
+      --surface: #131316;
+      --surface-2: #1A1A1F;
+      --text: #F5F4EF;
+      --muted: #A6A5A0;
+      --orange: #FF6B2C;
+      --green: #B8FF3D;
+      --pink: #FF3D81;
+      --violet: #7C5CFC;
+      --border: rgba(245, 244, 239, 0.12);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 90px 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .orb.one {
+      width: 360px;
+      height: 360px;
+      background: var(--violet);
+      top: -120px;
+      right: -100px;
+    }
+
+    .orb.two {
+      width: 280px;
+      height: 280px;
+      background: var(--orange);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      max-width: 980px;
+      margin: 0 0 30px;
+      font-weight: 850;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      font-size: 20px;
+      color: var(--muted);
+    }
+
+    .signal {
+      margin-top: 55px;
+      display: inline-block;
+      padding: 24px 28px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.025);
+      backdrop-filter: blur(12px);
+    }
+
+    .signal-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .signal-result {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+    }
+
+    section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-number {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      margin: 0 0 22px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin: 0 0 12px;
+      letter-spacing: -0.025em;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 720px;
+      margin-bottom: 45px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .score-card {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .score-card.primary {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 1px rgba(255,107,44,0.2);
+    }
+
+    .score-name {
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .score-value {
+      font-size: 46px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: -0.05em;
+    }
+
+    .score-band {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 34px;
+    }
+
+    .content-card.large {
+      grid-column: span 2;
+    }
+
+    .content-card p {
+      color: var(--muted);
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .question {
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      margin-top: 16px;
+    }
+
+    .investigation {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .investigation-item {
+      padding: 16px 18px;
+      background: var(--surface-2);
+      border-radius: 12px;
+      font-weight: 650;
+    }
+
+    .connection {
+      border-radius: 28px;
+      padding: 45px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,92,252,0.18),
+          rgba(255,61,129,0.08)
+        );
+      border: 1px solid rgba(124,92,252,0.35);
+    }
+
+    .connection p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 820px;
+    }
+
+    .method {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 45px;
+    }
+
+    .method-step {
+      padding: 25px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      text-align: center;
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    .method-step:nth-child(1) {
+      border-color: var(--orange);
+    }
+
+    .method-step:nth-child(2) {
+      border-color: var(--green);
+    }
+
+    .method-step:nth-child(3) {
+      border-color: var(--pink);
+    }
+
+    .method-step:nth-child(4) {
+      border-color: var(--violet);
+    }
+
+    .method-step:nth-child(5) {
+      border-color: var(--orange);
+    }
+
+    .method-step:nth-child(6) {
+      border-color: var(--green);
+    }
+
+    .cta {
+      text-align: center;
+      padding: 110px 25px 130px;
+    }
+
+    .cta h2 {
+      max-width: 800px;
+      margin: 0 auto 22px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 35px;
+      font-size: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 17px 25px;
+      border-radius: 999px;
+      font-weight: 850;
+      background: var(--orange);
+      color: #0B0B0D;
+      transition: transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary-actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .secondary-actions a,
+    .secondary-actions button {
+      background: none;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .review-list {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .review-list li {
+      padding-left: 25px;
+      position: relative;
+      color: var(--muted);
+    }
+
+    .review-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .error {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .error-box {
+      max-width: 650px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .score-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .method {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .page {
+        padding: 0 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 80px 0;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .score-grid,
+      .content-grid,
+      .method {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card.large {
+        grid-column: span 1;
+      }
+
+      .score-card {
+        min-height: 150px;
+      }
+
+      .connection {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+  /*
+    ============================================================
+    OPERATIONAL CAPACITY DIAGNOSTIC
+    Dynamic data comes from Tally via URL parameters.
+
+    IMPORTANT:
+    Email is intentionally NOT accepted or displayed from the URL.
+    Tally continues to capture email separately in Google Sheets.
+    ============================================================
+  */
+
+  const CONTENT = {
+
+    manual: {
+      name: "Manual Load",
+      max: 6,
+
+      hero:
+        "Your business may be losing capacity to manual work.",
+
+      whyHeadline:
+        "Some of the work may be happening because the process works that way.",
+
+      why:
+        "Your responses suggest that repetitive administration, information movement or rework may be consuming capacity that could otherwise be used for higher-value work. The issue is not necessarily that the work is difficult. It is that some of it may not need to be done in its current form.",
+
+      meaning:
+        "Manual work becomes an operational constraint when people repeatedly move, check, reconcile or recreate information.",
+
+      question:
+        "How much of the work your team performs is necessary, and how much exists because the process works this way?",
+
+      investigation: [
+        "Repetitive data entry and re-entry",
+        "Spreadsheet and system handoffs",
+        "Duplicate reporting or administration",
+        "Rework caused by incomplete or changing information"
+      ]
+    },
+
+    coordination: {
+      name: "Coordination Drag",
+      max: 9,
+
+      hero:
+        "Your biggest operational friction may be coordination.",
+
+      whyHeadline:
+        "Work may be slowing down between people, teams or stages.",
+
+      why:
+        "Your responses suggest that chasing, handoffs, approvals or unclear ownership may be creating friction. A process can be individually efficient while still being slow overall if work repeatedly waits for someone else.",
+
+      meaning:
+        "Coordination becomes expensive when people have to actively push work forward rather than the process moving it forward.",
+
+      question:
+        "Where does work stop moving unless someone actively pushes it forward?",
+
+      investigation: [
+        "Approval chains and waiting points",
+        "Unclear ownership and accountability",
+        "Actions that depend on follow-up",
+        "Meetings and handoffs required to maintain alignment"
+      ]
+    },
+
+    scaling: {
+      name: "Scaling Friction",
+      max: 9,
+
+      hero:
+        "Growth may be creating work faster than it creates capacity.",
+
+      whyHeadline:
+        "More volume may be creating disproportionately more operational effort.",
+
+      why:
+        "Your responses suggest that important processes may depend on people, manual coordination or activities that grow directly with workload. This can remain manageable at one level of activity and become a constraint as the business grows.",
+
+      meaning:
+        "The key question is whether additional volume requires additional operational effort at roughly the same rate.",
+
+      question:
+        "What would happen if your business grew 25% without adding 25% more operational effort?",
+
+      investigation: [
+        "Processes where workload rises directly with volume",
+        "Key-person dependencies",
+        "Manual administration created by growth",
+        "Coordination requirements that increase with workload"
+      ]
+    },
+
+    visibility: {
+      name: "Visibility Gap",
+      max: 9,
+
+      hero:
+        "Your business may be spending too much time finding out what happened.",
+
+      whyHeadline:
+        "Information may not be sufficiently connected, visible or trusted when decisions need to be made.",
+
+      why:
+        "Your responses suggest that people may need to reconcile information, investigate what happened or establish which version is correct before action can be taken.",
+
+      meaning:
+        "Visibility problems consume capacity when managers and teams have to establish the facts before they can decide what to do.",
+
+      question:
+        "How much management time is spent establishing the facts before a decision can even begin?",
+
+      investigation: [
+        "Multiple versions of the same information",
+        "Manual reporting and reconciliation",
+        "Time spent investigating causes",
+        "Information required to make decisions but difficult to access"
+      ]
+    },
+
+    automation: {
+      name: "Automation Readiness Gap",
+      max: 12,
+
+      hero:
+        "You may have automation opportunities, but the process needs attention first.",
+
+      whyHeadline:
+        "The opportunity may be real, but the foundations for automation may not yet be clear.",
+
+      why:
+        "Your responses suggest that some processes may contain inconsistent inputs, unclear ownership, exceptions or dependencies on individual knowledge. Automation can make a good process faster. It can also make a fragmented process fail faster.",
+
+      meaning:
+        "The first opportunity may not be automation itself. It may be making the underlying process clear, repeatable and measurable.",
+
+      question:
+        "Before asking what we can automate, can we clearly explain how the process is supposed to work?",
+
+      investigation: [
+        "Processes nobody can clearly describe end-to-end",
+        "Poor or inconsistent data",
+        "Unclear ownership and decision points",
+        "Manual exceptions and individual workarounds"
+      ]
+    }
+  };
+
+
+  const SECONDARY_INSIGHTS = {
+
+    "manual|coordination":
+      "Manual work and coordination can reinforce each other. Information that is difficult to move or maintain can create additional chasing, checking and handoffs.",
+
+    "manual|scaling":
+      "Manual work can become increasingly expensive in terms of capacity as volume grows. Work that is manageable today may become a constraint if the business continues to scale.",
+
+    "manual|visibility":
+      "Manual information handling can make visibility harder. When information is repeatedly moved or reconciled, establishing a trusted view can consume additional management time.",
+
+    "manual|automation":
+      "There may be automation opportunities here, but the first question is whether the underlying process is sufficiently clear and repeatable to automate effectively.",
+
+    "coordination|manual":
+      "Coordination friction may be amplified by the amount of manual information movement required between people and teams.",
+
+    "coordination|scaling":
+      "If coordination requirements increase with workload, growth can create additional management effort even when the underlying work itself has not become more complex.",
+
+    "coordination|visibility":
+      "Poor visibility can increase coordination because people compensate by asking for updates, reconciling information and checking progress manually.",
+
+    "coordination|automation":
+      "Before automating handoffs, it may be necessary to clarify ownership, decision points and the process itself.",
+
+    "scaling|manual":
+      "Growth-driven workload combined with manual processes can create an important capacity question: does additional volume require additional people simply to keep the process moving?",
+
+    "scaling|coordination":
+      "Growth may be increasing not only the amount of work, but also the number of interactions required to coordinate it.",
+
+    "scaling|visibility":
+      "As volume increases, information gaps can make it harder to understand where capacity is being consumed and which problems are actually driving the workload.",
+
+    "scaling|automation":
+      "There may be a strong case to examine automation, but scaling a process before its foundations are clear can simply multiply the underlying problems.",
+
+    "visibility|manual":
+      "The effort required to produce and reconcile information may itself be contributing to the visibility problem.",
+
+    "visibility|coordination":
+      "When teams lack a shared view of information, coordination effort often increases as people compensate through meetings, messages and follow-ups.",
+
+    "visibility|scaling":
+      "As the business grows, information gaps can become more costly because there are more transactions, decisions and dependencies to understand.",
+
+    "visibility|automation":
+      "Better technology may help, but the first step is establishing which information matters, who owns it and how it should flow through the process.",
+
+    "automation|manual":
+      "The amount of manual work suggests there may be automation opportunities, but those opportunities should be assessed alongside the quality and consistency of the underlying process.",
+
+    "automation|coordination":
+      "Automation may eventually reduce some handoffs, but unclear ownership or decision points need to be addressed first.",
+
+    "automation|scaling":
+      "If the business is already experiencing scaling friction, automation could potentially help decouple workload growth from operational effort once the right processes have been identified.",
+
+    "automation|visibility":
+      "Automation will only improve visibility if the underlying information is consistent, trusted and connected to the decisions the business needs to make."
+  };
+
+
+  const PARAMS = new URLSearchParams(window.location.search);
+
+  const data = {
+    name: clean(PARAMS.get("name")) || "there",
+    company: clean(PARAMS.get("company")) || "your business",
+    jobtitle: clean(PARAMS.get("jobtitle")) || "",
+
+    manual: number(PARAMS.get("manual")),
+    coordination: number(PARAMS.get("coordination")),
+    scaling: number(PARAMS.get("scaling")),
+    visibility: number(PARAMS.get("visibility")),
+    automation: number(PARAMS.get("automation")),
+
+    primary: clean(PARAMS.get("primary")),
+    secondary: clean(PARAMS.get("secondary")),
+
+    calendly:
+      clean(PARAMS.get("calendly")) ||
+      "https://calendly.com/felipebart"
+  };
+
+
+  function clean(value) {
+    return value ? value.trim() : "";
+  }
+
+
+  function number(value) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+
+  function band(key, score) {
+
+    if (key === "manual") {
+      if (score <= 2) return "Low";
+      if (score <= 4) return "Moderate";
+      return "Strong";
+    }
+
+    if (key === "automation") {
+      if (score <= 3) return "Low";
+      if (score <= 7) return "Moderate";
+      return "Strong";
+    }
+
+    if (score <= 2) return "Low";
+    if (score <= 5) return "Moderate";
+    return "Strong";
+  }
+
+
+  function signalLanguage(level) {
+
+    if (level === "Low") {
+      return "Your answers show some evidence of this. There may be opportunities to investigate, but the signal is relatively limited.";
+    }
+
+    if (level === "Moderate") {
+      return "Your answers suggest this is a meaningful area to investigate. There may be a material opportunity to understand what is driving the workload.";
+    }
+
+    return "Your answers show a strong signal around this area. This appears to be one of the more significant operational constraints identified by your responses. Quantifying the underlying workload could be particularly useful.";
+  }
+
+
+  const VALID_KEYS = [
+    "manual",
+    "coordination",
+    "scaling",
+    "visibility",
+    "automation"
+  ];
+
+
+  function normaliseKey(value) {
+    if (!value) return "";
+
+    const v = value.toLowerCase().trim();
+
+    if (VALID_KEYS.includes(v)) return v;
+
+    const aliases = {
+      "manual load": "manual",
+      "coordination drag": "coordination",
+      "scaling friction": "scaling",
+      "visibility gap": "visibility",
+      "automation readiness gap": "automation"
+    };
+
+    return aliases[v] || "";
+  }
+
+
+  data.primary = normaliseKey(data.primary);
+  data.secondary = normaliseKey(data.secondary);
+
+
+  const hasRequiredData =
+    data.primary &&
+    data.secondary &&
+    VALID_KEYS.includes(data.primary) &&
+    VALID_KEYS.includes(data.secondary);
+
+
+  if (!hasRequiredData) {
+    document.getElementById("app").innerHTML = `
+      <div class="error">
+        <div class="error-box">
+          <div class="eyebrow">Operational Capacity Diagnostic</div>
+          <h2>Report link incomplete.</h2>
+          <p class="section-intro">
+            This report needs the diagnostic results supplied by the
+            completed Tally submission. Please return to the diagnostic
+            and submit it again.
+          </p>
+        </div>
+      </div>
+    `;
+  } else {
+
+    const primary = CONTENT[data.primary];
+    const secondary = CONTENT[data.secondary];
+
+    const primaryBand = band(data.primary, data[data.primary]);
+
+
+    document.getElementById("app").innerHTML = `
+
+      <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+          <div class="orb one"></div>
+          <div class="orb two"></div>
+
+          <div class="page">
+
+            <div class="eyebrow">
+              Operational Capacity Diagnostic
+            </div>
+
+            <h1>
+              Hi ${escapeHTML(data.name)}.
+              <br>
+              Here is your
+              <span>${escapeHTML(data.company)}</span>
+              diagnostic.
+            </h1>
+
+            <p class="hero-copy">
+              Let's get started.
+              Your responses highlight where operational capacity
+              may currently be getting consumed.
+            </p>
+
+            <div class="signal">
+
+              <div class="signal-label">
+                Your strongest signal
+              </div>
+
+              <div class="signal-result">
+                ${escapeHTML(primary.name)}
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- SCORECARD -->
+
+        <section>
+          <div class="page">
+
+            <div class="section-number">01 / SCORECARD</div>
+
+            <h2>
+              Five signals.<br>
+              One starting point.
+            </h2>
+
+            <p class="section-intro">
+              These scores are not performance ratings or financial
+              valuations. They show the strength of the operational
+              signals identified by your responses.
+            </p>
+
+            <div class="score-grid">
+
+              ${scoreCard("manual", "Manual Load")}
+              ${scoreCard("coordination", "Coordination Drag")}
+              ${scoreCard("scaling", "Scaling Friction")}
+              ${scoreCard("visibility", "Visibility Gap")}
+              ${scoreCard("automation", "Automation Readiness Gap")}
+
+            </div>
+
+            <p class="note">
+              A higher score means a stronger signal from the diagnostic
+              responses and provides a starting point for investigation.
+            </p>
+
+          </div>
+        </section>
+
+
+        <!-- WHY -->
+
+        <section>
+          <div class="page">
+
+            <div class="section-number">02 / WHY THIS SURFACED</div>
+
+            <div class="content-grid">
+
+              <div class="content-card large">
+
+                <div class="eyebrow">
+                  ${escapeHTML(primary.name)}
+                </div>
+
+                <h2>
+                  ${escapeHTML(primary.whyHeadline)}
+                </h2>
+
+                <p>
+                  ${escapeHTML(primary.why)}
+                </p>
+
+              </div>
+
+              <div class="content-card">
+
+                <h3>What this means</h3>
+
+                <p>
+                  ${escapeHTML(primary.meaning)}
+                </p>
+
+              </div>
+
+              <div class="content-card">
+
+                <h3>The question to investigate</h3>
+
+                <div class="question">
+                  ${escapeHTML(primary.question)}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- INVESTIGATION -->
+
+        <section>
+          <div class="page">
+
+            <div class="section-number">03 / INVESTIGATE FIRST</div>
+
+            <h2>
+              Where we would<br>
+              look first.
+            </h2>
+
+            <p class="section-intro">
+              The diagnostic identifies a signal. The next step is to
+              understand what is actually creating the workload.
+            </p>
+
+            <div class="investigation">
+
+              ${primary.investigation
+                .map(item => `
+                  <div class="investigation-item">
+                    ${escapeHTML(item)}
+                  </div>
+                `)
+                .join("")}
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- CONNECTION -->
+
+        <section>
+          <div class="page">
+
+            <div class="section-number">04 / THE CONNECTION</div>
+
+            <div class="connection">
+
+              <div class="eyebrow">
+                Secondary signal: ${escapeHTML(secondary.name)}
+              </div>
+
+              <h2>
+                The signals may be connected.
+              </h2>
+
+              <p>
+                ${escapeHTML(
+                  SECONDARY_INSIGHTS[
+                    `${data.primary}|${data.secondary}`
+                  ] || ""
+                )}
+              </p>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- METHODOLOGY -->
+
+        <section>
+          <div class="page">
+
+            <div class="section-number">05 / METHODOLOGY</div>
+
+            <h2>
+              We don't start<br>
+              with technology.
+            </h2>
+
+            <p class="section-intro">
+              Technology is a lever. The first job is understanding
+              where capacity is actually being consumed.
+            </p>
+
+            <div class="method">
+
+              <div class="method-step">DIAGNOSE</div>
+              <div class="method-step">QUANTIFY</div>
+              <div class="method-step">REDESIGN</div>
+              <div class="method-step">IMPLEMENT</div>
+              <div class="method-step">AUTOMATE</div>
+              <div class="method-step">AI</div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- COMMERCIAL BRIDGE -->
+
+        <section>
+          <div class="page">
+
+            <div class="section-number">06 / NEXT STEP</div>
+
+            <div class="content-grid">
+
+              <div class="content-card large">
+
+                <div class="eyebrow">
+                  From signal to evidence
+                </div>
+
+                <h2>
+                  The diagnostic tells us where to look.
+                </h2>
+
+                <p>
+                  It does not tell us how much the problem costs,
+                  how many hours are involved, or exactly what should
+                  change. That requires a deeper review of the
+                  operational reality.
+                </p>
+
+              </div>
+
+              <div class="content-card">
+
+                <h3>What we would explore</h3>
+
+                <ul class="review-list">
+
+                  <li>
+                    Where operational capacity may currently be consumed
+                  </li>
+
+                  <li>
+                    Which processes may be creating unnecessary work
+                  </li>
+
+                  <li>
+                    What could potentially be removed, simplified or automated
+                  </li>
+
+                  <li>
+                    What information would be needed to quantify the opportunity properly
+                  </li>
+
+                </ul>
+
+              </div>
+
+              <div class="content-card">
+
+                <h3>No complicated pitch.</h3>
+
+                <p>
+                  The first conversation is simply about understanding
+                  whether there is a real operational opportunity worth
+                  investigating.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- CTA -->
+
+        <section class="cta">
+
+          <div class="page">
+
+            <div class="eyebrow">
+              Explore the opportunity
+            </div>
+
+            <h2>
+              Want to explore what this could mean for your business?
+            </h2>
+
+            <p>
+              Book a free 30-minute Operational Review.
+              We will look at the signal, the underlying process
+              and what would be required to quantify the opportunity.
+            </p>
+
+            <a
+              class="button"
+              href="${escapeAttribute(data.calendly)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book My Free 30-Minute Review
+            </a>
+
+            <p class="note">
+              No sales presentation. No obligation.
+              Just an initial review of the opportunity.
+            </p>
+
+            <div class="secondary-actions">
+
+              <button id="saveResults">
+                Save / Share My Results
+              </button>
+
+              <a
+                href="https://www.linkedin.com/in/felipebart/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Talk to Felipe
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+    `;
+
+
+    function scoreCard(key, label) {
+
+      const score = data[key];
+      const max = CONTENT[key].max;
+      const isPrimary = key === data.primary;
+      const level = band(key, score);
+
+      return `
+        <div class="score-card ${isPrimary ? "primary" : ""}">
+
+          <div>
+            <div class="score-name">
+              ${escapeHTML(label)}
+            </div>
+
+            ${
+              isPrimary
+                ? `<div class="eyebrow" style="margin-top:10px;margin-bottom:0;">
+                    Primary signal
+                   </div>`
+                : ""
+            }
+          </div>
+
+          <div class="score-value">
+            ${score}/${max}
+          </div>
+
+          <div class="score-band">
+            ${escapeHTML(level)} signal
+          </div>
+
+        </div>
+      `;
+    }
+
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function escapeAttribute(value) {
+      return escapeHTML(value);
+    }
+
+
+    /*
+      Save / Share
+
+      No email address is used.
+      The report URL itself is copied/shared instead.
+    */
+
+    const saveButton =
+      document.getElementById("saveResults");
+
+    if (saveButton) {
+
+      saveButton.addEventListener("click", async () => {
+
+        const reportUrl = window.location.href;
+
+        if (navigator.share) {
+
+          try {
+
+            await navigator.share({
+              title:
+                `${data.company} Operational Capacity Diagnostic`,
+              text:
+                "My Operational Capacity Diagnostic",
+              url:
+                reportUrl
+            });
+
+          } catch (error) {
+            // User cancelled sharing.
+          }
+
+        } else if (navigator.clipboard) {
+
+          try {
+
+            await navigator.clipboard.writeText(reportUrl);
+
+            saveButton.textContent =
+              "Report Link Copied";
+
+            setTimeout(() => {
+
+              saveButton.textContent =
+                "Save / Share My Results";
+
+            }, 2500);
+
+          } catch (error) {
+
+            saveButton.textContent =
+              "Copy Failed";
+
+          }
+
+        } else {
+
+          window.prompt(
+            "Copy your report link:",
+            reportUrl
+          );
+
+        }
+
+      });
+
+    }
+
+  }
+</script>
+
+</body>
+</html>
